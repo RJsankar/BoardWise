@@ -1,40 +1,118 @@
 .home {
-  max-width: 720px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 1.25rem 1rem 4rem;
+  padding: 0 1rem 5rem;
 }
 
-@media (max-width: 480px) {
-  .home__logo { font-size: 2rem; }
-  .home__header { padding: 1.5rem 0 1.25rem; }
-  .home__grid { grid-template-columns: 1fr; }
-}
-
-.home__header {
+/* ── Hero ── */
+.home__hero {
   text-align: center;
-  padding: 2.5rem 0 2rem;
+  padding: 3.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home__hero-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4caf7d;
+  background: rgba(76, 175, 125, 0.1);
+  border: 1px solid rgba(76, 175, 125, 0.25);
+  border-radius: 99px;
+  padding: 0.25rem 0.75rem;
 }
 
 .home__logo {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-weight: 900;
   color: var(--color-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 .home__tagline {
-  margin-top: 0.5rem;
   color: var(--color-text-muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 380px;
+}
+
+.home__tagline-br { display: none; }
+
+.home__stats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 99px;
+}
+
+.home__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.home__stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.home__stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.home__stat-divider {
+  width: 1px;
+  height: 2rem;
+  background: var(--color-border);
+}
+
+/* ── Sections ── */
+.home__section {
+  margin-top: 2.5rem;
 }
 
 .home__section-title {
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-text-muted);
   margin-bottom: 1rem;
+}
+
+.home__section-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.home__section-dot--active {
+  background: #4caf7d;
+  box-shadow: 0 0 6px rgba(76,175,125,0.6);
+}
+
+.home__section-dot--soon {
+  background: var(--color-text-muted);
 }
 
 .home__grid {
@@ -43,7 +121,7 @@
   gap: 1rem;
 }
 
-/* Game Card */
+/* ── Game Card ── */
 .game-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -54,12 +132,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  transition: border-color 0.2s, transform 0.15s;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
 }
 
-.game-card:hover {
+.game-card:not(.game-card--soon):hover {
   border-color: var(--color-primary);
   transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(240, 165, 0, 0.1);
 }
 
 .game-card__family {
@@ -98,13 +178,54 @@
   padding: 0.15rem 0.55rem;
 }
 
-.game-card__complexity--light   { color: #4caf7d !important; border-color: rgba(76,175,125,0.3) !important; }
-.game-card__complexity--medium  { color: var(--color-primary) !important; border-color: rgba(240,165,0,0.3) !important; }
-.game-card__complexity--heavy   { color: #e05c5c !important; border-color: rgba(224,92,92,0.3) !important; }
+.game-card__complexity--light  { color: #4caf7d !important; border-color: rgba(76,175,125,0.3) !important; }
+.game-card__complexity--medium { color: var(--color-primary) !important; border-color: rgba(240,165,0,0.3) !important; }
+.game-card__complexity--heavy  { color: #e05c5c !important; border-color: rgba(224,92,92,0.3) !important; }
 
 .game-card__cta {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-primary);
+}
+
+/* ── Coming Soon Card ── */
+.game-card--soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.game-card__soon-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--color-border);
+  border-radius: 99px;
+  padding: 0.2rem 0.55rem;
+}
+
+/* ── Footer ── */
+.home__footer {
+  margin-top: 3.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .home__logo { font-size: 2.2rem; }
+  .home__hero { padding: 2rem 0 1.5rem; }
+  .home__tagline-br { display: block; }
+  .home__grid { grid-template-columns: 1fr; }
+  .home__stats { gap: 1rem; padding: 0.65rem 1.25rem; }
+  .home__stat-value { font-size: 1.1rem; }
 }
