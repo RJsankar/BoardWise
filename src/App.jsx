@@ -5,6 +5,21 @@ import './App.css'
 
 const GAME_LIST = Object.values(games)
 
+// Thumbnail images for the landing page cards
+const THUMBNAILS = {
+  'catan':          '/assets/catan-midgame.png',
+  'ticket-to-ride': '/assets/ttr-intro.png',
+  'sequence':       '/assets/seq-gameplay.png',
+  'monopoly-deal':  null,   // gradient fallback
+  'uno':            null,   // gradient fallback
+}
+
+// Gradient fallbacks for games without photos yet
+const GRADIENTS = {
+  'monopoly-deal': 'linear-gradient(135deg, #1a3a1a 0%, #2d5a1b 50%, #c8a000 100%)',
+  'uno':           'linear-gradient(135deg, #3a0a0a 0%, #b01010 50%, #1a1a6e 100%)',
+}
+
 const COMING_SOON = [
   {
     game_id: 'azul',
@@ -34,6 +49,19 @@ const COMING_SOON = [
     time_estimate: '10–20 min',
   },
 ]
+
+function GameThumb({ gameId }) {
+  const src = THUMBNAILS[gameId]
+  const gradient = GRADIENTS[gameId]
+
+  if (src) {
+    return <img src={src} alt={gameId} className="game-card__thumb" />
+  }
+  if (gradient) {
+    return <div className="game-card__thumb game-card__thumb--gradient" style={{ background: gradient }} />
+  }
+  return null
+}
 
 export default function App() {
   const [selectedGame, setSelectedGame] = useState(null)
@@ -87,17 +115,20 @@ export default function App() {
               className="game-card"
               onClick={() => setSelectedGame(game)}
             >
-              <div className="game-card__family">{game.family}</div>
-              <h3 className="game-card__title">{game.title}</h3>
-              <p className="game-card__theme">{game.theme}</p>
-              <div className="game-card__meta">
-                <span>{game.player_count} players</span>
-                <span>{game.time_estimate}</span>
-                <span className={`game-card__complexity game-card__complexity--${game.complexity}`}>
-                  {game.complexity}
-                </span>
+              <GameThumb gameId={game.game_id} />
+              <div className="game-card__body">
+                <div className="game-card__family">{game.family}</div>
+                <h3 className="game-card__title">{game.title}</h3>
+                <p className="game-card__theme">{game.theme}</p>
+                <div className="game-card__meta">
+                  <span>{game.player_count} players</span>
+                  <span>{game.time_estimate}</span>
+                  <span className={`game-card__complexity game-card__complexity--${game.complexity}`}>
+                    {game.complexity}
+                  </span>
+                </div>
+                <div className="game-card__cta">Start Tutorial →</div>
               </div>
-              <div className="game-card__cta">Start Tutorial →</div>
             </button>
           ))}
         </div>
@@ -112,15 +143,17 @@ export default function App() {
           {COMING_SOON.map(game => (
             <div key={game.game_id} className="game-card game-card--soon">
               <div className="game-card__soon-badge">Coming Soon</div>
-              <div className="game-card__family">{game.family}</div>
-              <h3 className="game-card__title">{game.title}</h3>
-              <p className="game-card__theme">{game.theme}</p>
-              <div className="game-card__meta">
-                <span>{game.player_count} players</span>
-                <span>{game.time_estimate}</span>
-                <span className={`game-card__complexity game-card__complexity--${game.complexity}`}>
-                  {game.complexity}
-                </span>
+              <div className="game-card__body">
+                <div className="game-card__family">{game.family}</div>
+                <h3 className="game-card__title">{game.title}</h3>
+                <p className="game-card__theme">{game.theme}</p>
+                <div className="game-card__meta">
+                  <span>{game.player_count} players</span>
+                  <span>{game.time_estimate}</span>
+                  <span className={`game-card__complexity game-card__complexity--${game.complexity}`}>
+                    {game.complexity}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
