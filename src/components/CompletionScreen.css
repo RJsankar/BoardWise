@@ -1,0 +1,126 @@
+.completion {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.completion__icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.completion__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.completion__subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-top: -0.5rem;
+}
+
+.completion__subtitle strong {
+  color: var(--color-text);
+}
+
+.completion__stats {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  width: 100%;
+  justify-content: center;
+}
+
+.completion__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.completion__stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.completion__stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.completion__reminder {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  text-align: left;
+  width: 100%;
+}
+
+.completion__reminder-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.completion__reminder-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.completion__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.completion__btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.completion__btn--primary {
+  background: var(--color-primary);
+  color: #000;
+}
+
+.completion__btn--primary:hover { background: #ffc733; }
+
+.completion__btn--ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.completion__btn--ghost:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}

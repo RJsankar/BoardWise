@@ -1,0 +1,28 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #0f0f13;
+  --color-surface: #1c1c24;
+  --color-border: #2e2e3a;
+  --color-primary: #f0a500;
+  --color-text: #e8e8f0;
+  --color-text-muted: #8888a0;
+  --radius: 12px;
+  --font: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font);
+  min-height: 100dvh;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Prevent layout blowout on very small screens */
+img, video { max-width: 100%; }
+button { font-family: inherit; }

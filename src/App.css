@@ -1,0 +1,110 @@
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 4rem;
+}
+
+@media (max-width: 480px) {
+  .home__logo { font-size: 2rem; }
+  .home__header { padding: 1.5rem 0 1.25rem; }
+  .home__grid { grid-template-columns: 1fr; }
+}
+
+.home__header {
+  text-align: center;
+  padding: 2.5rem 0 2rem;
+}
+
+.home__logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.home__tagline {
+  margin-top: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.home__section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.home__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* Game Card */
+.game-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.game-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.game-card__family {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.game-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.game-card__theme {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.game-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.game-card__meta span {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 99px;
+  padding: 0.15rem 0.55rem;
+}
+
+.game-card__complexity--light   { color: #4caf7d !important; border-color: rgba(76,175,125,0.3) !important; }
+.game-card__complexity--medium  { color: var(--color-primary) !important; border-color: rgba(240,165,0,0.3) !important; }
+.game-card__complexity--heavy   { color: #e05c5c !important; border-color: rgba(224,92,92,0.3) !important; }
+
+.game-card__cta {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
