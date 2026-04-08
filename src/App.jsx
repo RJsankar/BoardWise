@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import TutorialPlayer from './components/TutorialPlayer.jsx'
 import games from './data/index.js'
 import './App.css'
@@ -10,14 +11,8 @@ const THUMBNAILS = {
   'catan':          '/assets/catan-midgame.png',
   'ticket-to-ride': '/assets/ttr-intro.png',
   'sequence':       '/assets/seq-gameplay.png',
-  'monopoly-deal':  null,   // gradient fallback
-  'uno':            null,   // gradient fallback
-}
-
-// Gradient fallbacks for games without photos yet
-const GRADIENTS = {
-  'monopoly-deal': 'linear-gradient(135deg, #1a3a1a 0%, #2d5a1b 50%, #c8a000 100%)',
-  'uno':           'linear-gradient(135deg, #3a0a0a 0%, #b01010 50%, #1a1a6e 100%)',
+  'monopoly-deal':  '/assets/monopoly-deal-logo.png',
+  'uno':            '/assets/uno-logo.png',
 }
 
 const COMING_SOON = [
@@ -29,6 +24,7 @@ const COMING_SOON = [
     theme: 'Draft colourful tiles from factories and arrange them on your board to score points — but waste nothing.',
     player_count: '2–4',
     time_estimate: '30–45 min',
+    image: '/assets/azul-logo.png',
   },
   {
     game_id: 'exploding-kittens',
@@ -38,6 +34,7 @@ const COMING_SOON = [
     theme: 'Draw cards until someone pulls an Exploding Kitten — use action cards to dodge, defuse, and survive.',
     player_count: '2–5',
     time_estimate: '15–20 min',
+    image: '/assets/exploding-kittens-logo.png',
   },
   {
     game_id: 'taco-cat',
@@ -47,20 +44,39 @@ const COMING_SOON = [
     theme: 'Slap the pile when the card matches the word you just said — fastest hands win the deck.',
     player_count: '2–8',
     time_estimate: '10–20 min',
+    image: '/assets/taco-cat-logo.png',
   },
 ]
 
-function GameThumb({ gameId }) {
-  const src = THUMBNAILS[gameId]
-  const gradient = GRADIENTS[gameId]
+// Animation variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show:   { opacity: 1, y: 0 },
+}
 
-  if (src) {
-    return <img src={src} alt={gameId} className="game-card__thumb" />
-  }
-  if (gradient) {
-    return <div className="game-card__thumb game-card__thumb--gradient" style={{ background: gradient }} />
-  }
-  return null
+const heroStagger = {
+  hidden: {},
+  show:   { transition: { staggerChildren: 0.1 } },
+}
+
+const cardStagger = {
+  hidden: {},
+  show:   { transition: { staggerChildren: 0.08 } },
+}
+
+const cardItem = {
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  show:   { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 22 } },
+}
+
+const sectionTitle = {
+  hidden: { opacity: 0, x: -16 },
+  show:   { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+}
+
+function GameThumb({ src }) {
+  if (!src) return null
+  return <img src={src} alt="" className="game-card__thumb" />
 }
 
 export default function App() {
@@ -79,13 +95,23 @@ export default function App() {
 
   return (
     <div className="home">
-      <header className="home__hero">
-        <div className="home__hero-badge">Free · No account needed</div>
-        <h1 className="home__logo">BoardWise</h1>
-        <p className="home__tagline">
+      {/* ── Hero ── */}
+      <motion.header
+        className="home__hero"
+        variants={heroStagger}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div className="home__hero-badge" variants={fadeUp}>
+          Free · No account needed
+        </motion.div>
+        <motion.h1 className="home__logo" variants={fadeUp}>
+          BoardWise
+        </motion.h1>
+        <motion.p className="home__tagline" variants={fadeUp}>
           Learn any board game in minutes,<br className="home__tagline-br" /> not rulebook-hours.
-        </p>
-        <div className="home__stats">
+        </motion.p>
+        <motion.div className="home__stats" variants={fadeUp}>
           <div className="home__stat">
             <span className="home__stat-value">{GAME_LIST.length}</span>
             <span className="home__stat-label">Games</span>
@@ -100,22 +126,38 @@ export default function App() {
             <span className="home__stat-value">8</span>
             <span className="home__stat-label">Stages per game</span>
           </div>
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
 
+      {/* ── Available Now ── */}
       <section className="home__section">
-        <h2 className="home__section-title">
+        <motion.h2
+          className="home__section-title"
+          variants={sectionTitle}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+        >
           <span className="home__section-dot home__section-dot--active" />
           Available Now
-        </h2>
-        <div className="home__grid">
+        </motion.h2>
+        <motion.div
+          className="home__grid"
+          variants={cardStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+        >
           {GAME_LIST.map(game => (
-            <button
+            <motion.button
               key={game.game_id}
               className="game-card"
+              variants={cardItem}
+              whileHover={{ y: -4, boxShadow: '0 8px 28px rgba(240,165,0,0.18)', borderColor: 'var(--color-primary)' }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedGame(game)}
             >
-              <GameThumb gameId={game.game_id} />
+              <GameThumb src={THUMBNAILS[game.game_id]} />
               <div className="game-card__body">
                 <div className="game-card__family">{game.family}</div>
                 <h3 className="game-card__title">{game.title}</h3>
@@ -129,20 +171,38 @@ export default function App() {
                 </div>
                 <div className="game-card__cta">Start Tutorial →</div>
               </div>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </section>
 
+      {/* ── Coming Soon ── */}
       <section className="home__section">
-        <h2 className="home__section-title">
+        <motion.h2
+          className="home__section-title"
+          variants={sectionTitle}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+        >
           <span className="home__section-dot home__section-dot--soon" />
           Coming Soon
-        </h2>
-        <div className="home__grid">
+        </motion.h2>
+        <motion.div
+          className="home__grid"
+          variants={cardStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+        >
           {COMING_SOON.map(game => (
-            <div key={game.game_id} className="game-card game-card--soon">
+            <motion.div
+              key={game.game_id}
+              className="game-card game-card--soon"
+              variants={cardItem}
+            >
               <div className="game-card__soon-badge">Coming Soon</div>
+              {game.image && <GameThumb src={game.image} />}
               <div className="game-card__body">
                 <div className="game-card__family">{game.family}</div>
                 <h3 className="game-card__title">{game.title}</h3>
@@ -155,9 +215,9 @@ export default function App() {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       <footer className="home__footer">
