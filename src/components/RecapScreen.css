@@ -1,0 +1,131 @@
+.recap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0.75rem 0.9rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 100dvh;
+}
+
+.recap__header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0;
+}
+
+.recap__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recap__badge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4caf7d;
+  background: rgba(76, 175, 125, 0.1);
+  border: 1px solid rgba(76, 175, 125, 0.25);
+  border-radius: 99px;
+  padding: 0.2rem 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.recap__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.recap__subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Sections */
+.recap__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.recap__section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.recap__section--warn {
+  border-left-color: #e05c5c;
+}
+
+.recap__section--qr {
+  border-left-color: var(--color-border);
+  padding: 0.5rem 0.75rem;
+}
+
+.recap__section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.recap__section-label--warn {
+  color: #e05c5c;
+}
+
+.recap__section-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.recap__section-text--muted {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.recap__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.recap__list li {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Actions */
+.recap__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .recap {
+    padding: 0.5rem 0.75rem 2rem;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import TutorialPlayer from './components/TutorialPlayer.jsx'
+import RecapScreen from './components/RecapScreen.jsx'
 import games from './data/index.js'
 import './App.css'
 
@@ -81,12 +82,23 @@ function GameThumb({ src }) {
 
 export default function App() {
   const [selectedGame, setSelectedGame] = useState(null)
+  const [selectedRecap, setSelectedRecap] = useState(null)
 
   if (selectedGame) {
     return (
       <TutorialPlayer
         game={selectedGame}
         onExit={() => setSelectedGame(null)}
+      />
+    )
+  }
+
+  if (selectedRecap) {
+    return (
+      <RecapScreen
+        game={selectedRecap}
+        onStartTutorial={() => { setSelectedRecap(null); setSelectedGame(selectedRecap) }}
+        onExit={() => setSelectedRecap(null)}
       />
     )
   }
@@ -170,6 +182,12 @@ export default function App() {
                   </span>
                 </div>
                 <div className="game-card__cta">Start Tutorial →</div>
+                <button
+                  className="game-card__recap-link"
+                  onClick={e => { e.stopPropagation(); setSelectedRecap(game) }}
+                >
+                  Quick Recap
+                </button>
               </div>
             </motion.button>
           ))}
